@@ -1,0 +1,45 @@
+#weather-result {
+    padding: 30px;
+    width: 60%;
+    position: relative;
+}
+
+h4 {
+    color: #fff;
+    font-weight: 400;
+}
+
+.results {
+    color: #fff;
+    padding: 20px;
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2.3rem;
+    background: rgba(75, 73, 73, 0.2);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    /* max-width: 25rem; */
+}
+
+.results>p {
+    font-size: 4rem;
+    font-weight: 300;
+}
+
+.other-details {
+    padding: 0 2rem;
+}
+
+.other-details h3 {
+    font-weight: 400;
+}
+
+.other-details p,
+.weather-icon p {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.weather-icon img {}
