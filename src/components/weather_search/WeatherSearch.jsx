@@ -6,20 +6,41 @@ import searchIcon from '../../assets/search.svg'
 function WeatherSearch({ countryDetails, setCountryDetails, loader, setLoader }) {
 
     const apiKey = '32ebb4b35f6eb0f1f526e2e9c5010e51'
+    let api
 
     const [inputValue, setInputValue] = useState('')
     const [recentCountry, setRecentCountry] = useState([])
 
     function keyPressed(e) {
         if (e.keyCode === 13) {
-            searchWeather(inputValue)
+            requestApi(inputValue)
             setLoader(true)
             setInputValue('')
         }
     }
 
-    function searchWeather(city) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`)
+    function requestApi(city) {
+        api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+        searchWeather()
+    }
+
+    function getGeolocation() {
+        navigator.geolocation ? navigator.geolocation.getCurrentPosition(onSuccess, onError)
+            : console.log("Your browser not support geolocation api")
+    }
+
+    function onSuccess(position) {
+        const { latitude, longitude } = position.coords
+        api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=your_api_key`
+        searchWeather()
+    }
+
+    function onError(error) {
+        console.log(error.message)
+    }
+
+    function searchWeather() {
+        fetch(api)
             .then(
                 response => response.json()
             ).then(
@@ -45,7 +66,7 @@ function WeatherSearch({ countryDetails, setCountryDetails, loader, setLoader })
                 onKeyDown={keyPressed}
             />
             <div className="search-icon">
-                <img src={searchIcon} alt="search-icon" />
+                <img src={searchIcon} alt="search-icon" onClick={() => getGeolocation()} />
             </div>
 
             <div className="recent-searches">
