@@ -3,7 +3,7 @@
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(2px);
     opacity: .8;
-    width: 40%;
+    width: 35%;
 }
 
 input {
@@ -42,7 +42,7 @@ input {
 }
 
 .searches-list {
-    max-height: 140px;
+    max-height: 200px;
     overflow-y: scroll;
 }
 

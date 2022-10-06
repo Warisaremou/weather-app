@@ -3,19 +3,17 @@ import { useState } from 'react'
 import './weatherSearch.css'
 import searchIcon from '../../assets/search.svg'
 
-function WeatherSearch() {
+function WeatherSearch({ countryDetails, setCountryDetails, loader, setLoader }) {
 
     const apiKey = '32ebb4b35f6eb0f1f526e2e9c5010e51'
-    // const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
 
     const [inputValue, setInputValue] = useState('')
-    const [country, setCountry] = useState([])
+    const [recentCountry, setRecentCountry] = useState([])
 
     function keyPressed(e) {
         if (e.keyCode === 13) {
-            // console.log(inputValue)
-            setCountry(currentValue => [...currentValue, inputValue])
             searchWeather(inputValue)
+            setLoader(true)
             setInputValue('')
         }
     }
@@ -31,11 +29,13 @@ function WeatherSearch() {
 
     function weatherDetails(cityName) {
         console.log(cityName)
-
-        cityName.cod === '404' ? console.log("Erreur !")
-        :(
-            console.log(cityName.cod)
-        )
+        setLoader(false)
+        if (cityName.cod === "404") {
+            alert("Error invalide city name !")
+        } else {
+            setRecentCountry(currentValue => [...currentValue, inputValue])
+            setCountryDetails(cityName)
+        }
     }
 
     return (
@@ -51,7 +51,7 @@ function WeatherSearch() {
             <div className="recent-searches">
                 <h5>Recent searches</h5>
                 <div className="searches-list">
-                    {country.map((countryName, index) => (
+                    {recentCountry.map((countryName, index) => (
                         <p key={`${countryName}-${index}`} >
                             {countryName.charAt(0).toUpperCase() + countryName.slice(1)}
                         </p>
@@ -63,19 +63,19 @@ function WeatherSearch() {
                 <h4>Weather Details</h4>
                 <div className="detail">
                     <h4>Cloudy</h4>
-                    <p>12%</p>
+                    <p>{`${countryDetails.clouds ? countryDetails.clouds.all : 0}%`}</p>
                 </div>
                 <div className="detail">
                     <h4>Humidity</h4>
-                    <p>78%</p>
+                    <p>{`${countryDetails.main ? countryDetails.main.humidity : 0}%`}</p>
                 </div>
                 <div className="detail">
                     <h4>Wind</h4>
-                    <p>1km/h</p>
+                    <p>{`${countryDetails.wind ? countryDetails.wind.speed : 0}km/h`}</p>
                 </div>
                 <div className="detail">
                     <h4>Rain</h4>
-                    <p>0mm</p>
+                    <p>{`${countryDetails.rain ? countryDetails.rain['1h'] : 0}mm`}</p>
                 </div>
             </div>
         </div>

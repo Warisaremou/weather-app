@@ -1,7 +1,16 @@
 #weather-result {
     padding: 30px;
-    width: 60%;
+    width: 65%;
     position: relative;
+}
+
+.weather-logo {
+    display: flex;
+    align-items: center;
+}
+
+.weather-logo img {
+    margin-left: 5px;
 }
 
 h4 {
@@ -40,4 +49,8 @@ h4 {
 .weather-icon p {
     font-size: 12px;
     font-weight: 400;
+}
+
+.weather-icon img {
+    margin: 0;
 }
