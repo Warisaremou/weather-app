@@ -49,7 +49,7 @@ function WeatherSearch({ countryDetails, setCountryDetails, loader, setLoader })
     }
 
     function weatherDetails(cityName) {
-        console.log(cityName)
+        // console.log(cityName)
         setLoader(false)
         if (cityName.cod === "404") {
             alert("Error invalide city name !")
