@@ -4,4 +4,4 @@
 
 # Click on the search button to get the weather with the geolocation
 
-link to my app [https://warisaremou.github.io/weather-app/]
+## link to my app [https://warisaremou.github.io/weather-app/]
