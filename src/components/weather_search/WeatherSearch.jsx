@@ -5,7 +5,7 @@ import searchIcon from '../../assets/search.svg'
 
 function WeatherSearch({ countryDetails, setCountryDetails, loader, setLoader }) {
 
-    const apiKey = '32ebb4b35f6eb0f1f526e2e9c5010e51'
+    const apiKey = process.env.REACT_APP_API_KEY
     let api
 
     const [inputValue, setInputValue] = useState('')
